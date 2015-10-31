@@ -23,6 +23,8 @@ class Sponsor(models.Model):
     )
 
     name = models.CharField("名称", max_length=100)
+    shimei = models.CharField("担当者氏名", max_length=100)
+    email = models.EmailField("メールアドレス", blank=True)
     category = models.IntegerField("スポンサー種別", choices=CATEGORY_CHOICES)
     token = models.CharField("トークン", max_length=100, unique=True)
     is_enabled = models.BooleanField("有効", default=True, blank=True)
