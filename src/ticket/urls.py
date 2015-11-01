@@ -19,5 +19,7 @@ from django.contrib.auth.views import login
 from ticket import views
 
 urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]

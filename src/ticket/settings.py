@@ -99,7 +99,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "ticket_type_list"
+LOGIN_REDIRECT_URL = "index"
 
 
 # Static files (CSS, JavaScript, Images)
