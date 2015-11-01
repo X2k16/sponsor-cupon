@@ -1,6 +1,7 @@
 # encoding=utf-8
 
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Sponsor(models.Model):
@@ -32,6 +33,9 @@ class Sponsor(models.Model):
 
     created_at = models.DateTimeField("登録日時", auto_now_add=True)
     updated_at = models.DateTimeField("最終更新日時", auto_now=True)
+
+    def get_absolute_url(self):
+        return reverse("sponsor_detail", args=(self.id,))
 
 
 class Account(models.Model):

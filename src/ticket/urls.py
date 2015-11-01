@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^sponsors/$', views.sponsor_list, name='sponsor_list'),
     url(r'^sponsors/add/$', views.SponsorCreateFormView.as_view(), name='sponsor_add'),
+    url(r'^sponsors/(\d+)/$', views.sponsor_detail, name='sponsor_detail'),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]

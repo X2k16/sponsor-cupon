@@ -2,6 +2,7 @@
 
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView
 
 from django.contrib.auth.views import login as django_login
@@ -27,6 +28,14 @@ def sponsor_list(request):
         "sponsors": sponsors
     }
     return render(request, "sponsor_list.html", context)
+
+
+def sponsor_detail(request, pk):
+    sponsor = get_object_or_404(Sponsor, id=pk)
+    context = {
+        "sponsor": sponsor
+    }
+    return render(request, "sponsor_detail.html", context)
 
 
 class SponsorCreateFormView(CreateView):
