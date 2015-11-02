@@ -1,5 +1,7 @@
 # encoding=utf-8
 
+import uuid
+
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -34,8 +36,23 @@ class Sponsor(models.Model):
     created_at = models.DateTimeField("登録日時", auto_now_add=True)
     updated_at = models.DateTimeField("最終更新日時", auto_now=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.token:
+            self.token = str(uuid.uuid4())
+
     def get_absolute_url(self):
         return reverse("sponsor_detail", args=(self.id,))
+
+    def get_default_ticket_count(self):
+        master = {
+            self.CATEGORY_PLATINUM: 15,
+            self.CATEGORY_GOLD: 10,
+            self.CATEGORY_SILVER: 5,
+            self.CATEGORY_IRON: 3,
+            self.CATEGORY_LUNCH: 3,
+        }
+        return master.get(self.category, 0)
 
 
 class Account(models.Model):

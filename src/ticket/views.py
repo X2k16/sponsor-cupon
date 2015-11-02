@@ -9,7 +9,7 @@ from django.contrib.auth.views import login as django_login
 
 from ticket.forms import AuthenticationForm
 from ticket.forms import SponsorCreateForm, SponsorUpdateForm
-from ticket.models import Sponsor
+from ticket.models import Sponsor, Ticket
 
 
 def index(request):
@@ -43,7 +43,18 @@ class SponsorCreateFormView(CreateView):
     form_class = SponsorCreateForm
 
     def form_valid(self, form):
-        form.save()
+        instance = form.save()
+
+        # チケットを作成する
+        tickets = []
+        for i in range(instance.get_default_ticket_count()):
+            ticket = Ticket()
+            ticket.name = "{0}様 {1}".format(instance.name, (i + 1))
+            ticket.sponsor = instance
+            ticket.is_registered = False
+            tickets.append(ticket)
+        Ticket.objects.bulk_create(tickets)
+
         return super().form_valid(form)
 
 
