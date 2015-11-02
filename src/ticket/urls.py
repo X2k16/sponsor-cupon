@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^sponsors/$', views.sponsor_list, name='sponsor_list'),
     url(r'^sponsors/add/$', views.SponsorCreateFormView.as_view(), name='sponsor_add'),
     url(r'^sponsors/(\d+)/$', views.sponsor_detail, name='sponsor_detail'),
+    url(r'^sponsors/(?P<pk>\d+)/edit/$', views.SponsorUpdateFormView.as_view(), name='sponsor_edit'),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]

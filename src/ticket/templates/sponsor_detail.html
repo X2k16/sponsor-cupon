@@ -1,5 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{{ sponsor.name }} <small>{{ sponsor.get_category_display }}</small></h2>
+<h2>{{ sponsor.name }} 様 <small>{{ sponsor.get_category_display }}</small></h2>
+
+<table class="table table-striped">
+  <tbody>
+    <tr>
+      <th>ID</th><td>{{sponsor.id}}</td>
+    </tr>
+    <tr>
+      <th>名称</th><td>{{sponsor.name}} 様</td>
+    </tr>
+    <tr>
+      <th>担当者</th><td>{{sponsor.shimei}} 様</td>
+    </tr>
+    <tr>
+      <th>メールアドレス</th><td>{{sponsor.email}}</td>
+    </tr>
+    <tr>
+      <th>備考</th><td>{{sponsor.description|linebreaks}}</td>
+    </tr>
+</table>
+
+<p>
+  <a href="{% url "sponsor_edit" sponsor.id %}">
+    <button type="button" class="btn btn-primary btn-sm">情報修正</button>
+  </a>
+</p>
 {% endblock %}

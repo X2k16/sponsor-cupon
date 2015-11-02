@@ -10,13 +10,14 @@
 
 <table class="table table-striped">
   <thead>
-    <tr><th>ID</th><th>名称</th></tr>
+    <tr><th>ID</th><th>カテゴリ</th><th>名称</th></tr>
   </thead>
   <tbody>
     {% for sponsor in sponsors %}
       <tr>
         <th>{{sponsor.id}}</th>
-        <td><a href="{% url "sponsor_detail" sponsor.id %}">{{sponsor.name}}</a></td>
+        <td>{{sponsor.get_category_display}}</td>
+        <td><a href="{% url "sponsor_detail" sponsor.id %}">{{sponsor.name}}</a> 様</td>
       </tr>
     {% endfor %}
   </tbody>

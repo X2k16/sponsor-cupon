@@ -22,8 +22,15 @@ class AuthenticationForm(BootstrapMixins, DjangoAuthenticationForm):
         self.fields["password"].widget.attrs["placeholder"] = "Password"
 
 
-class SponsorForm(BootstrapMixins, forms.ModelForm):
+class SponsorCreateForm(BootstrapMixins, forms.ModelForm):
 
     class Meta:
         model = Sponsor
         fields = ("name", "shimei", "email", "category", "description")
+
+
+class SponsorUpdateForm(BootstrapMixins, forms.ModelForm):
+
+    class Meta:
+        model = Sponsor
+        fields = ("name", "shimei", "email", "description")

@@ -3,12 +3,12 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 from django.contrib.auth.views import login as django_login
 
 from ticket.forms import AuthenticationForm
-from ticket.forms import SponsorForm
+from ticket.forms import SponsorCreateForm, SponsorUpdateForm
 from ticket.models import Sponsor
 
 
@@ -40,7 +40,17 @@ def sponsor_detail(request, pk):
 
 class SponsorCreateFormView(CreateView):
     template_name = 'sponsor_form.html'
-    form_class = SponsorForm
+    form_class = SponsorCreateForm
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+
+class SponsorUpdateFormView(UpdateView):
+    model = Sponsor
+    template_name = 'sponsor_form.html'
+    form_class = SponsorUpdateForm
 
     def form_valid(self, form):
         form.save()
