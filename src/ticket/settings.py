@@ -106,3 +106,5 @@ LOGIN_REDIRECT_URL = "index"
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+TICKET_EMAIL_FORMAT = "x2k16+debug{0}.{1}@example.com"

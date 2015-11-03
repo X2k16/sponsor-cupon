@@ -61,7 +61,8 @@ class Account(models.Model):
         verbose_name = verbose_name_plural = "Ptxアカウント"
         ordering = ("id",)
 
-    name = models.CharField("名前", max_length=100)
+    last_name = models.CharField("姓", max_length=100)
+    first_name = models.CharField("名", max_length=100)
     email = models.EmailField("メールアドレス", max_length=300)
     password = models.CharField("パスワード", max_length=50)
     is_registered = models.BooleanField("登録済", blank=True, default=False)
