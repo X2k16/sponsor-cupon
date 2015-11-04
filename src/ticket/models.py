@@ -41,6 +41,9 @@ class Sponsor(models.Model):
         if not self.token:
             self.token = str(uuid.uuid4())
 
+    def __str__(self):
+        return self.name
+
     def get_absolute_url(self):
         return reverse("sponsor_detail", args=(self.id,))
 
@@ -61,14 +64,16 @@ class Account(models.Model):
         verbose_name = verbose_name_plural = "Ptxアカウント"
         ordering = ("id",)
 
-    last_name = models.CharField("姓", max_length=100)
-    first_name = models.CharField("名", max_length=100)
+    name = models.CharField("表示名", max_length=100)
     email = models.EmailField("メールアドレス", max_length=300)
     password = models.CharField("パスワード", max_length=50)
     is_registered = models.BooleanField("登録済", blank=True, default=False)
 
     created_at = models.DateTimeField("登録日時", auto_now_add=True)
     updated_at = models.DateTimeField("最終更新日時", auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Ticket(models.Model):
@@ -89,3 +94,6 @@ class Ticket(models.Model):
 
     created_at = models.DateTimeField("登録日時", auto_now_add=True)
     updated_at = models.DateTimeField("最終更新日時", auto_now=True)
+
+    def __str__(self):
+        return self.name
