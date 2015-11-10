@@ -49,7 +49,7 @@ class Ptx(object):
 
         time.sleep(1)
 
-        if not "マイイベント" in self.driver.title:
+        if not "マイイベント" in self.driver.title and not "Dashboard" in self.driver.title:
             raise PtxError("Login error")
 
     def create_account(self, email, password, nickname):
@@ -65,7 +65,7 @@ class Ptx(object):
 
         time.sleep(1)
 
-        if not "マイイベント" in self.driver.title:
+        if not "マイイベント" in self.driver.title and not "Dashboard" in self.driver.title:
             raise PtxError("Login error")
 
     def buy_ticket(self, event_id, ticket_id, lastname, firstname, count, cupon_code=""):
