@@ -3,6 +3,7 @@ from selenium import webdriver
 import time
 import io
 import base64
+from django.conf import settings
 
 
 class PtxError(Exception):
@@ -13,8 +14,15 @@ class Ptx(object):
 
     def __init__(self):
         webdriver.DesiredCapabilities.PHANTOMJS['phantomjs.page.customHeaders.Accept-Language'] = 'ja-JP'
-        #self.driver = webdriver.PhantomJS()
-        self.driver = webdriver.Chrome()
+        if settings.WEBDRIVER == "chrome":
+            self.driver = webdriver.Chrome()
+        elif settings.WEBDRIVER == "phantomjs":
+            self.driver = webdriver.PhantomJS()
+        elif settings.WEBDRIVER == "chrome-hub":
+            self.driver = webdriver.Remote(settings.WEBDRIVER_URL, {'platform': 'ANY', 'browserName': 'chrome', 'version': '', 'javascriptEnabled': True})
+        else:
+            raise ValueError("Invalid WebDriver")
+
         self.driver.implicitly_wait(10)  # seconds
 
     def get(self, url):

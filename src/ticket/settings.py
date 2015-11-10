@@ -106,6 +106,7 @@ LOGIN_REDIRECT_URL = "index"
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+WEBDRIVER = 'chrome'
 
 TICKET_EMAIL_FORMAT = "x2k16+debug{0}.{1}@example.com"
 PTX_EVENT_ID = 000000
