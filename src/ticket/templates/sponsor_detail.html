@@ -20,6 +20,20 @@
     <tr>
       <th>備考</th><td>{{sponsor.description|linebreaks}}</td>
     </tr>
+    <tr>
+      <th>チケット</th>
+      <td>
+        {% if sponsor.is_in_preparation %}
+        生成中
+        {% else %}
+        <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th>スポンサー様用URL</th>
+      <td><a href="{{url}}">{{url}}</a></td>
+    </tr>
 </table>
 
 <p>

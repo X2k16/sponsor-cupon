@@ -1,0 +1,53 @@
+{% extends "get/base.html" %}
+
+{% block content %}
+
+<h2>チケットのお受け取り</h2>
+
+<p>{{ sponsor.name }}様</p>
+<p>この度はスポンサー協力いただきまして、誠にありがとうございます。</p>
+
+{% if is_in_preparation %}
+<p>現在チケットを準備しております、しばらく経ってからアクセスしてください。</p>
+{% else %}
+
+
+<p>以下のフォームにご来場いただく方の情報を入力いただき、チケットをダウンロードしてください。</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ formset.management_form }}
+
+  {% for form in formset %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <div class="form-group {% if form.shimei.errors %}has-error{% endif %}">
+        <label for="{{form.shimei.auto_id}}" class="control-label">{{form.shimei.label}}</label>
+        {{form.shimei}}
+        {% if form.shimei.errors %}
+        {% for error in form.shimei.errors %}
+        <p class="text-error">{{ error }}</p>
+        {% endfor %}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+          {{form.is_booth}} ブース担当者の方はチェックをいれてください
+          </label>
+        </div>
+      </div>
+      {{ form.id }}
+
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="form-group">
+    <button class="btn btn-lg btn-default">送信</button>
+  </div>
+</form>
+{% endif %}
+
+{% endblock %}

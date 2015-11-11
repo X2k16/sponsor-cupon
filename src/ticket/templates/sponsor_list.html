@@ -10,7 +10,7 @@
 
 <table class="table table-striped">
   <thead>
-    <tr><th>ID</th><th>カテゴリ</th><th>名称</th></tr>
+    <tr><th>ID</th><th>カテゴリ</th><th>名称</th><th></th></tr>
   </thead>
   <tbody>
     {% for sponsor in sponsors %}
@@ -18,6 +18,13 @@
         <th>{{sponsor.id}}</th>
         <td>{{sponsor.get_category_display}}</td>
         <td><a href="{% url "sponsor_detail" sponsor.id %}">{{sponsor.name}}</a> 様</td>
+        <td>
+          {% if sponsor.is_in_preparation %}
+            チケット生成中
+          {% else %}
+          <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">チケット</button></a>
+          {% endif %}
+        </td>
       </tr>
     {% endfor %}
   </tbody>
