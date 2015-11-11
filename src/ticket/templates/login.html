@@ -38,6 +38,9 @@
 </style>
 {% endblock %}
 
+{% block breadcrumb %}
+{% endblock %}
+
 {% block content %}
 <form class="form-signin {% if form.errors %}has-error{% endif %}" method="post">
   {% csrf_token %}

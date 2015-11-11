@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% block breadcrumb-items %}
+<li><a href="{% url "sponsor_list" %}">スポンサー一覧</a></li>
+<li><a href="{% url "sponsor_detail" sponsor.id %}">{{ sponsor.name }}様</a></li>
+{% endblock %}
+
+
 {% block content %}
 <h2>{{ sponsor.name }} 様 <small>{{ sponsor.get_category_display }}</small></h2>
 

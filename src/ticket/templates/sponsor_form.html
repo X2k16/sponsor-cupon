@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{% block breadcrumb-items %}
+<li><a href="{% url "sponsor_list" %}">スポンサー一覧</a></li>
+{% if form.instance.id %}
+  <li><a href="{% url "sponsor_detail" sponsor.id %}">{{ sponsor.name }}様</a></li>
+  <li><a href="{% url "sponsor_edit" sponsor.id %}">修正</a></li>
+{% else %}
+  <li><a href="{% url "sponsor_add" %}">新規登録</a></li>
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
 
 {% if form.errors %}
