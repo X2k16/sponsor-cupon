@@ -20,6 +20,14 @@
     <tr>
       <th>備考</th><td>{{sponsor.description|linebreaks}}</td>
     </tr>
+    <tr>
+      <th>チケット</th>
+      <td><a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a></td>
+    </tr>
+    <tr>
+      <th>スポンサー様用URL</th>
+      <td><a href="{{url}}">{{url}}</a></td>
+    </tr>
 </table>
 
 <p>
