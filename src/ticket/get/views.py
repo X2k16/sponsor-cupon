@@ -3,9 +3,11 @@
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.http import HttpResponse
 from ticket.models import Sponsor
 from ticket.models import Ticket
 from ticket.get.forms import TicketFormSet
+from ticket.pdf import generate_ticket_pdf
 
 
 def index(request, token):
@@ -30,3 +32,6 @@ def index(request, token):
 def download(request, token):
     sponsor = get_object_or_404(Sponsor, token=token)
     tickets = sponsor.tickets.all()
+    response = HttpResponse(content_type='application/pdf')
+    generate_ticket_pdf(tickets[0], response)
+    return response
