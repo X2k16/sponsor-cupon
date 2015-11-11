@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 
 from django.contrib.auth.views import login as django_login
+from django.contrib.auth.views import logout as django_logout
+from django.contrib.auth.decorators import login_required
 
 from ticket.forms import AuthenticationForm
 from ticket.forms import SponsorCreateForm, SponsorUpdateForm
@@ -22,6 +24,12 @@ def login(request):
     return django_login(request, "login.html", authentication_form=AuthenticationForm)
 
 
+def logout(request):
+    django_logout(request)
+    return redirect("index")
+
+
+@login_required
 def sponsor_list(request):
     sponsors = Sponsor.objects.all()
     context = {
@@ -30,6 +38,7 @@ def sponsor_list(request):
     return render(request, "sponsor_list.html", context)
 
 
+@login_required
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, id=pk)
     context = {
@@ -57,6 +66,8 @@ class SponsorCreateFormView(CreateView):
 
         return super().form_valid(form)
 
+sponsor_add = login_required(SponsorCreateFormView.as_view())
+
 
 class SponsorUpdateFormView(UpdateView):
     model = Sponsor
@@ -66,3 +77,5 @@ class SponsorUpdateFormView(UpdateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+sponsor_edit = login_required(SponsorUpdateFormView.as_view())

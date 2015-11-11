@@ -50,7 +50,7 @@
             {% endcomment %}
 
             {% if user.is_authenticated %}
-            <li role="presentation"><a href="#">Logout</a></li>
+            <li role="presentation"><a href="{% url "logout" %}">Logout</a></li>
             {% endif %}
           </ul>
         </nav>
