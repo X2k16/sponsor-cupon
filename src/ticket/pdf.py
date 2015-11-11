@@ -19,7 +19,6 @@ def _register_fonts():
     fonts = ["GenShinGothic-Regular", "GenShinGothic-Light"]
 
     for font in fonts:
-        print(font)
         pdfmetrics.registerFont(TTFont(font, "{0}/fonts/{1}.ttf".format(os.path.dirname(__file__), font)))
 
 _register_fonts()
@@ -58,6 +57,7 @@ def generate_ticket_pdf(ticket, f):
     if ticket.is_booth:
         page.setFillColorRGB(1, 0, 0)
         drawCenteredString(page, "GenShinGothic-Regular", 15, 105 * mm, 10 * mm, "ブース担当者様")
+        drawCenteredString(page, "GenShinGothic-Regular", 15, 105 * mm, 287 * mm, "ブース担当者様")
 
     qr = ImageReader(ticket.qr_code)
     page.drawImage(qr, 146 * mm, 106 * mm, 32 * mm, 32 * mm)
@@ -75,5 +75,28 @@ def generate_ticket_pdf(ticket, f):
 
     output.close()
     buffer.close()
+
+    return f
+
+
+def generate_tickets_pdf(tickets, f):
+    buffers = []
+    for ticket in tickets:
+        buffer = NamedTemporaryFile(suffix=".pdf", delete=True)
+        generate_ticket_pdf(ticket, buffer)
+        buffers.append(buffer)
+
+    output = NamedTemporaryFile(suffix=".pdf", delete=True)
+    cmd = ["pdftk"]
+    cmd += [buffer.name for buffer in buffers]
+    cmd += ["output", output.name]
+    subprocess.call(cmd)
+
+    output.seek(0)
+
+    f.write(output.read())
+    output.close()
+    for buffer in buffers:
+        buffer.close()
 
     return f
