@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^sponsors/add/$', views.sponsor_add, name='sponsor_add'),
     url(r'^sponsors/(\d+)/$', views.sponsor_detail, name='sponsor_detail'),
     url(r'^sponsors/(?P<pk>\d+)/edit/$', views.sponsor_edit, name='sponsor_edit'),
+    url(r'^get/', include("ticket.get.urls")),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]

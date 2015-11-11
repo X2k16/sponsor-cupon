@@ -83,7 +83,7 @@ class Ticket(models.Model):
         ordering = ("id",)
 
     name = models.CharField("チケット名", max_length=100, blank=True)
-    sponsor = models.ForeignKey("Sponsor", verbose_name="スポンサー")
+    sponsor = models.ForeignKey("Sponsor", verbose_name="スポンサー", related_name="tickets")
     account = models.OneToOneField("Account", verbose_name="Ptxアカウント", blank=True, null=True)
     qr_code = models.ImageField("QRコード", upload_to="qr", blank=True)
     is_registered = models.BooleanField("購入済", blank=True, default=False)

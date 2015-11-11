@@ -11,7 +11,10 @@ class BootstrapMixins(object):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
-            field.widget.attrs["class"] = "form-control"
+            if isinstance(field.widget, forms.widgets.CheckboxInput):
+                pass
+            else:
+                field.widget.attrs["class"] = "form-control"
 
 
 class AuthenticationForm(BootstrapMixins, DjangoAuthenticationForm):
