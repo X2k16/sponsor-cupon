@@ -21,9 +21,10 @@ from ticket import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^sponsors/$', views.sponsor_list, name='sponsor_list'),
-    url(r'^sponsors/add/$', views.SponsorCreateFormView.as_view(), name='sponsor_add'),
+    url(r'^sponsors/add/$', views.sponsor_add, name='sponsor_add'),
     url(r'^sponsors/(\d+)/$', views.sponsor_detail, name='sponsor_detail'),
-    url(r'^sponsors/(?P<pk>\d+)/edit/$', views.SponsorUpdateFormView.as_view(), name='sponsor_edit'),
+    url(r'^sponsors/(?P<pk>\d+)/edit/$', views.sponsor_edit, name='sponsor_edit'),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]
