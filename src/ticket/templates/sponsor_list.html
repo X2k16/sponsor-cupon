@@ -18,7 +18,13 @@
         <th>{{sponsor.id}}</th>
         <td>{{sponsor.get_category_display}}</td>
         <td><a href="{% url "sponsor_detail" sponsor.id %}">{{sponsor.name}}</a> 様</td>
-        <td><a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">チケット</button></a></td>
+        <td>
+          {% if sponsor.is_in_preparation %}
+            チケット生成中
+          {% else %}
+          <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">チケット</button></a>
+          {% endif %}
+        </td>
       </tr>
     {% endfor %}
   </tbody>

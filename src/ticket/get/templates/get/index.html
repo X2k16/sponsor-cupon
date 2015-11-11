@@ -6,6 +6,12 @@
 
 <p>{{ sponsor.name }}様</p>
 <p>この度はスポンサー協力いただきまして、誠にありがとうございます。</p>
+
+{% if is_in_preparation %}
+<p>現在チケットを準備しております、しばらく経ってからアクセスしてください。</p>
+{% else %}
+
+
 <p>以下のフォームにご来場いただく方の情報を入力いただき、チケットをダウンロードしてください。</p>
 
 <form method="post">
@@ -38,9 +44,10 @@
   </div>
   {% endfor %}
 
-  <button class="btn btn-lg btn-default">送信</button>
-
+  <div class="form-group">
+    <button class="btn btn-lg btn-default">送信</button>
+  </div>
 </form>
-
+{% endif %}
 
 {% endblock %}

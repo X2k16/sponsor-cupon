@@ -22,7 +22,13 @@
     </tr>
     <tr>
       <th>チケット</th>
-      <td><a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a></td>
+      <td>
+        {% if sponsor.is_in_preparation %}
+        生成中
+        {% else %}
+        <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a>
+        {% endif %}
+      </td>
     </tr>
     <tr>
       <th>スポンサー様用URL</th>

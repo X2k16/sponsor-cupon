@@ -57,6 +57,9 @@ class Sponsor(models.Model):
         }
         return master.get(self.category, 0)
 
+    def is_in_preparation(self):
+        return self.tickets.filter(is_registered=False).count() > 0
+
 
 class Account(models.Model):
 

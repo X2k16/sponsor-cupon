@@ -24,7 +24,8 @@ def index(request, token):
 
     context = {
         "sponsor": sponsor,
-        "formset": formset
+        "formset": formset,
+        "is_in_preparation": sponsor.is_in_preparation
     }
     return render(request, "get/index.html", context)
 
