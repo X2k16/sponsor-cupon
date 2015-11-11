@@ -1,2 +1,1 @@
-# sponsor_cupon
-スポンサーチケット管理システム
+# Sponsor Cupon Tool

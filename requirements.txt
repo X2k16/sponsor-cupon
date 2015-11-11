@@ -1,0 +1,4 @@
+selenium
+django<1.9
+pillow
+django-debug-toolbar

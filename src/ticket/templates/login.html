@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+<style>
+.form-signin {
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin #{{form.username.auto_id}} {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin #{{form.password.auto_id}} {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<form class="form-signin {% if form.errors %}has-error{% endif %}" method="post">
+  {% csrf_token %}
+  <h2 class="form-signin-heading">Login</h2>
+  <label for="{{form.username.auto_id}}" class="sr-only">Username</label>
+  {{form.username}}
+  <label for="{{form.password.auto_id}}" class="sr-only">Password</label>
+  {{form.password}}
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+</form>
+{% if form.errors %}
+<div class="alert alert-danger" role="alert">
+  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span>
+  ユーザー名またはパスワードが一致しません
+</div>
+{% endif %}
+{% endblock %}
