@@ -12,17 +12,23 @@ class Sponsor(models.Model):
         verbose_name = verbose_name_plural = "スポンサー"
         ordering = ("id",)
 
+    CATEGORY_OWNER = "owner"
+    CATEGORY_CROSS = "cross"
     CATEGORY_PLATINUM = "platinum"
     CATEGORY_GOLD = "gold"
     CATEGORY_SILVER = "silver"
     CATEGORY_IRON = "iron"
-    CATEGORY_LUNCH = "lunch"
+    CATEGORY_COMMUNITY = "community"
+    CATEGORY_POWER = "power"
     CATEGORY_CHOICES = (
+        (CATEGORY_OWNER, "主催"),
+        (CATEGORY_CROSS, "CROSS"),
         (CATEGORY_PLATINUM, "プラチナ"),
         (CATEGORY_GOLD, "ゴールド"),
         (CATEGORY_SILVER, "シルバー"),
         (CATEGORY_IRON, "アイアン"),
-        (CATEGORY_LUNCH, "ランチ"),
+        (CATEGORY_COMMUNITY, "コミュニティ"),
+        (CATEGORY_POWER, "パワーサプライ"),
     )
 
     name = models.CharField("名称", max_length=100)
@@ -49,11 +55,14 @@ class Sponsor(models.Model):
 
     def get_default_ticket_count(self):
         master = {
+            self.CATEGORY_OWNER: 20,
+            self.CATEGORY_CROSS: 5,
             self.CATEGORY_PLATINUM: 15,
             self.CATEGORY_GOLD: 10,
             self.CATEGORY_SILVER: 5,
             self.CATEGORY_IRON: 3,
-            self.CATEGORY_LUNCH: 3,
+            self.CATEGORY_COMMUNITY: 2,
+            self.CATEGORY_POWER: 5
         }
         return master.get(self.category, 0)
 
