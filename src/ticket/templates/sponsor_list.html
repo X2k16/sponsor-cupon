@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block breadcrumb-items %}
+<li><a href="{% url "sponsor_list" %}">スポンサー一覧</a></li>
+{% endblock %}
+
 {% block content %}
 
 <p>

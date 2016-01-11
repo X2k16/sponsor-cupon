@@ -50,8 +50,11 @@ def generate_ticket_pdf(ticket, f):
     # 印字ここから
     drawCenteredString(page, "GenShinGothic-Light", 15, 105 * mm, 190 * mm, "{0}スポンサー".format(ticket.sponsor.get_category_display()))
     drawCenteredString(page, "GenShinGothic-Regular", 25, 105 * mm, 165 * mm, "{0} 様".format(ticket.sponsor.name))
-    drawCenteredString(page, "GenShinGothic-Light", 10, 78 * mm, 138 * mm, "{0} 様".format(ticket.shimei))
 
+    if ticket.shimei:
+        drawCenteredString(page, "GenShinGothic-Light", 10, 78 * mm, 138 * mm, "{0} 様".format(ticket.shimei))
+
+    drawRightString(page, "GenShinGothic-Light", 10, 200 * mm, 10 * mm + 11, ticket.name)
     drawRightString(page, "GenShinGothic-Light", 10, 200 * mm, 10 * mm, "No. {0:03d}".format(ticket.id))
 
     if ticket.is_booth:

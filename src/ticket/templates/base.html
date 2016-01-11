@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="{% static "favicon.ico" %}">
 
-    <title>Narrow Jumbotron Template for Bootstrap</title>
+    <title>エンジニアサポート CROSS 2016 スポンサーチケット発行システム</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
@@ -54,8 +54,16 @@
             {% endif %}
           </ul>
         </nav>
-        <h3 class="text-muted">CROSS2016 Ticket</h3>
+        <h3 class="text-muted">CROSS 2016 スポンサーチケット</h3>
       </div>
+
+      {% block breadcrumb %}
+      <ol class="breadcrumb">
+        {% block breadcrumb-items %}
+        <li><a href="{% url "index" %}">Home</a></li>
+        {% endblock %}
+      </ol>
+      {% endblock %}
 
       {% block content %}{% endblock %}
 
