@@ -61,23 +61,23 @@ def sponsor_ticket(request, pk):
     sponsor = get_object_or_404(Sponsor, id=pk)
     return download(request, sponsor.token)
 
+
 @login_required
 def sponsor_list_ticket(request, pk):
     sponsor = get_object_or_404(Sponsor, id=pk)
     tickets = sponsor.tickets.all()
 
-
     form = TicketCreateForm(sponsor=sponsor)
     if request.method == "POST":
         form = TicketCreateForm(request.POST, sponsor=sponsor)
         if form.is_valid():
-
+            form.save()
             return HttpResponseRedirect("")
 
     context = {
-        "sponsor":sponsor,
-        "tickets":tickets,
-        "form":form
+        "sponsor": sponsor,
+        "tickets": tickets,
+        "form": form
     }
     return render(request, "sponsor_list_ticket.html", context)
 

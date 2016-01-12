@@ -10,23 +10,13 @@
 {% block content %}
 <h2>{{ sponsor.name }} 様 <small>{{ sponsor.get_category_display }}</small></h2>
 
-<table class="table table-striped">
-  <tbody>
-    <tr>
-      <th>ID</th><td>{{sponsor.id}}</td>
-    </tr>
-    <tr>
-      <th>名称</th><td>{{sponsor.name}} 様</td>
-    </tr>
-  </tbody>
-</table>
 
 <h3>チケット一覧</h3>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th><th>名前</th><th>氏名</th><th>ブース</th>
+      <th>ID</th><th>名前</th><th>氏名</th><th>ブース</th><th>ステータス</th>
   </thead>
   <tbody>
     {% for ticket in tickets %}
@@ -35,11 +25,12 @@
       <td>{{ticket.name}}</td>
       <td>{{ticket.shimei}}</td>
       <td>{% if ticket.is_booth %}ブース担当者{% endif %}</td>
+    <td>{% if not ticket.qr_code %}<span class="label label-warning">発行待ち</span>{% endif %}</td>
     </tr>
     {% endfor %}
 </table>
 
-<h4>追加</h4>
+<h3>追加</h3>
 <form class="form" method="post">
   {% csrf_token %}
 

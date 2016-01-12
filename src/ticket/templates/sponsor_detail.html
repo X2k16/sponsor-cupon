@@ -30,11 +30,11 @@
       <th>チケット</th>
       <td>
         {% if sponsor.is_in_preparation %}
-        生成中
+        発行中
         {% else %}
         <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a>
         {% endif %}
-        <a href="{% url "sponsor_list_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">追加</button></a>
+        <a href="{% url "sponsor_list_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">詳細</button></a>
       </td>
     </tr>
     <tr>
