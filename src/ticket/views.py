@@ -5,13 +5,14 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
+from django.http import HttpResponseRedirect
 
 from django.contrib.auth.views import login as django_login
 from django.contrib.auth.views import logout as django_logout
 from django.contrib.auth.decorators import login_required
 
 from ticket.forms import AuthenticationForm
-from ticket.forms import SponsorCreateForm, SponsorUpdateForm
+from ticket.forms import SponsorCreateForm, SponsorUpdateForm, TicketCreateForm
 from ticket.models import Sponsor, Ticket
 from ticket.get.views import download
 
@@ -59,6 +60,26 @@ def sponsor_detail(request, pk):
 def sponsor_ticket(request, pk):
     sponsor = get_object_or_404(Sponsor, id=pk)
     return download(request, sponsor.token)
+
+@login_required
+def sponsor_list_ticket(request, pk):
+    sponsor = get_object_or_404(Sponsor, id=pk)
+    tickets = sponsor.tickets.all()
+
+
+    form = TicketCreateForm(sponsor=sponsor)
+    if request.method == "POST":
+        form = TicketCreateForm(request.POST, sponsor=sponsor)
+        if form.is_valid():
+
+            return HttpResponseRedirect("")
+
+    context = {
+        "sponsor":sponsor,
+        "tickets":tickets,
+        "form":form
+    }
+    return render(request, "sponsor_list_ticket.html", context)
 
 
 class SponsorCreateFormView(CreateView):

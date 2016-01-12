@@ -34,6 +34,7 @@
         {% else %}
         <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">ダウンロード</button></a>
         {% endif %}
+        <a href="{% url "sponsor_list_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">追加</button></a>
       </td>
     </tr>
     <tr>

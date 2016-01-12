@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^sponsors/(\d+)/$', views.sponsor_detail, name='sponsor_detail'),
     url(r'^sponsors/(\d+)/cross_ticket.pdf$', views.sponsor_ticket, name='sponsor_ticket'),
     url(r'^sponsors/(?P<pk>\d+)/edit/$', views.sponsor_edit, name='sponsor_edit'),
+    url(r'^sponsors/(?P<pk>\d+)/tickets/$', views.sponsor_list_ticket, name='sponsor_list_ticket'),
     url(r'^get/', include("ticket.get.urls")),
     url(r'^nativeadmin/', include(admin.site.urls)),
 ]

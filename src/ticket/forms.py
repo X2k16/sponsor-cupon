@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm as DjangoAuthenticationForm
 
-from ticket.models import Sponsor
+from ticket.models import Sponsor, Ticket
 
 
 class BootstrapMixins(object):
@@ -37,3 +37,16 @@ class SponsorUpdateForm(BootstrapMixins, forms.ModelForm):
     class Meta:
         model = Sponsor
         fields = ("name", "shimei", "email", "description")
+
+
+class TicketCreateForm(BootstrapMixins, forms.ModelForm):
+
+    class Meta:
+        model = Ticket
+        fields = ("is_booth", )
+
+    count = forms.IntegerField(label="枚数")
+
+    def __init__(self, *args, **kwargs):
+        self.sponsor = kwargs.pop("sponsor")
+        super().__init__(*args, **kwargs)
