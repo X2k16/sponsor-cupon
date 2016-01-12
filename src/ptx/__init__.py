@@ -83,6 +83,14 @@ class Ptx(object):
         button.click()
         time.sleep(1)
 
+        if settings.PTX_FORM_DATA:
+            for name, value in settings.PTX_FORM_DATA.items():
+                self.set_value(name, value)
+
+            button = self.driver.find_element_by_id("form-submit-button")
+            button.click()
+            time.sleep(1)
+
         self.set_value("lastname", lastname)
         self.set_value("firstname", firstname)
         self.set_value("anonymous", False)
