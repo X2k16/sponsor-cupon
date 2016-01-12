@@ -24,7 +24,7 @@
         <td><a href="{% url "sponsor_detail" sponsor.id %}">{{sponsor.name}}</a> 様</td>
         <td>
           {% if sponsor.is_in_preparation %}
-            チケット生成中
+            <span class="label label-warning">発行中</span>
           {% else %}
           <a href="{% url "sponsor_ticket" sponsor.id %}"><button class="btn btn-xs btn-default">チケット</button></a>
           {% endif %}
