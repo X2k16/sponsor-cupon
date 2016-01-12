@@ -8,7 +8,7 @@ class TicketForm(BootstrapMixins, forms.ModelForm):
 
     class Meta:
         model = Ticket
-        fields = ("is_booth", "shimei")
+        fields = ("shimei", )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

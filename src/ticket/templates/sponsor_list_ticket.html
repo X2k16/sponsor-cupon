@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block breadcrumb-items %}
+<li><a href="{% url "sponsor_list" %}">スポンサー一覧</a></li>
+<li><a href="{% url "sponsor_detail" sponsor.id %}">{{ sponsor.name }}様</a></li>
+<li><a href="{% url "sponsor_list_ticket" sponsor.id %}">チケット追加</a></li>
+{% endblock %}
+
+
+{% block content %}
+<h2>{{ sponsor.name }} 様 <small>{{ sponsor.get_category_display }}</small></h2>
+
+
+<h3>チケット一覧</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th><th>名前</th><th>氏名</th><th>ブース</th><th>ステータス</th>
+  </thead>
+  <tbody>
+    {% for ticket in tickets %}
+    <tr>
+      <th>{{ticket.id}}</th>
+      <td>{{ticket.name}}</td>
+      <td>{{ticket.shimei}}</td>
+      <td>{% if ticket.is_booth %}ブース担当者{% endif %}</td>
+    <td>{% if not ticket.qr_code %}<span class="label label-warning">発行待ち</span>{% endif %}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>追加</h3>
+<form class="form" method="post">
+  {% csrf_token %}
+
+
+  <div class="form-group">
+    <label for="{{form.count.auto_id}}" class="control-label">ブース担当者</label>
+    <div class="checkbox">
+      <label>
+      {{form.is_booth}} ブース担当者用のチケットの場合にはチェックをつけてください
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group {% if form.count.errors %}has-error{% endif %}">
+    <label for="{{form.count.auto_id}}" class="control-label">{{form.count.label}}</label>
+    {{form.count}}
+    {% if form.count.errors %}
+    {% for error in form.count.errors %}
+    <p class="text-error">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit">発行</button>
+
+</form>
+
+
+
+
+{% endblock %}
