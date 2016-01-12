@@ -19,9 +19,9 @@
   {{ formset.management_form }}
 
   {% for form in formset %}
-  <div class="panel panel-default">
+  <div class="panel {% if form.isinstance.is_booth %}panel-info{% else %}panel-default{% endif %}">
     <div class="panel-body">
-
+      {% if form.isinstance.is_booth %}<p>ブース担当者</p>{% endif %}
       <div class="form-group {% if form.shimei.errors %}has-error{% endif %}">
         <label for="{{form.shimei.auto_id}}" class="control-label">{{form.shimei.label}}</label>
         {{form.shimei}}
@@ -30,13 +30,6 @@
         <p class="text-error">{{ error }}</p>
         {% endfor %}
         {% endif %}
-      </div>
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-          {{form.is_booth}} ブース担当者の方はチェックをいれてください
-          </label>
-        </div>
       </div>
       {{ form.id }}
 

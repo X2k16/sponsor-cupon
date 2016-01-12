@@ -90,7 +90,7 @@ class Ticket(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "購入済みチケット"
-        ordering = ("id",)
+        ordering = ("sponsor", "is_booth", "id",)
 
     name = models.CharField("チケット名", max_length=100, blank=True)
     sponsor = models.ForeignKey("Sponsor", verbose_name="スポンサー", related_name="tickets")
