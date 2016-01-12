@@ -27,8 +27,7 @@ class Sponsor(models.Model):
         (CATEGORY_GOLD, "ゴールド"),
         (CATEGORY_SILVER, "シルバー"),
         (CATEGORY_IRON, "アイアン"),
-        (CATEGORY_COMMUNITY, "コミュニティ"),
-        (CATEGORY_POWER, "パワーサプライ"),
+        (CATEGORY_COMMUNITY, "コミュニティ")
     )
 
     name = models.CharField("名称", max_length=100)
@@ -61,8 +60,7 @@ class Sponsor(models.Model):
             self.CATEGORY_GOLD: 10,
             self.CATEGORY_SILVER: 5,
             self.CATEGORY_IRON: 3,
-            self.CATEGORY_COMMUNITY: 2,
-            self.CATEGORY_POWER: 5
+            self.CATEGORY_COMMUNITY: 3
         }
         return master.get(self.category, 0)
 
