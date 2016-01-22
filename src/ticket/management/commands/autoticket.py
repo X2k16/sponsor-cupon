@@ -34,7 +34,7 @@ class Command(BaseCommand):
                 first_name = "ブース"
 
             account = Account(
-                name=ticket.name,
+                name="{0}({1})".format(ticket.name, ticket.sponsor.get_category_display()),
                 email=email,
                 password=password,
                 is_registered=True
