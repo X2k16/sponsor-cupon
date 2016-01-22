@@ -20,6 +20,7 @@ class Sponsor(models.Model):
     CATEGORY_IRON = "iron"
     CATEGORY_COMMUNITY = "community"
     CATEGORY_POWER = "power"
+    CATEGORY_SPEAKER = "speaker"
     CATEGORY_CHOICES = (
         (CATEGORY_OWNER, "主催"),
         (CATEGORY_CROSS, "CROSS"),
@@ -27,7 +28,8 @@ class Sponsor(models.Model):
         (CATEGORY_GOLD, "ゴールド"),
         (CATEGORY_SILVER, "シルバー"),
         (CATEGORY_IRON, "アイアン"),
-        (CATEGORY_COMMUNITY, "コミュニティ")
+        (CATEGORY_COMMUNITY, "コミュニティ"),
+        (CATEGORY_SPEAKER, "登壇者")
     )
 
     name = models.CharField("名称", max_length=100)
@@ -60,7 +62,8 @@ class Sponsor(models.Model):
             self.CATEGORY_GOLD: 10,
             self.CATEGORY_SILVER: 5,
             self.CATEGORY_IRON: 3,
-            self.CATEGORY_COMMUNITY: 3
+            self.CATEGORY_COMMUNITY: 3,
+            self.CATEGORY_SPEAKER: 1
         }
         return master.get(self.category, 0)
 
