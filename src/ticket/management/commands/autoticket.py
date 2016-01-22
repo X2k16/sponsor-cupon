@@ -30,6 +30,8 @@ class Command(BaseCommand):
             password = ''.join([random.choice(string.ascii_letters + string.digits) for n in range(18)])
             last_name = "スポンサー"
             first_name = "チケット"
+            if ticket.is_booth:
+                first_name = "ブース"
 
             account = Account(
                 name=ticket.name,
